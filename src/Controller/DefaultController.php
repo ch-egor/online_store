@@ -9,6 +9,7 @@ class DefaultController extends AbstractController
 {
     /**
      * @Route("/")
+     * @Route("/{route}", requirements={"route"="^(?!.*_wdt|_profiler|_error).+"})
      */
     public function index()
     {
