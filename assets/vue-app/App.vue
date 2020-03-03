@@ -23,7 +23,7 @@
 
       <div class="starter-template">
         <h1>Bootstrap starter template</h1>
-        <div id="app">
+        <div>
           <router-view/>
         </div>
       </div>
