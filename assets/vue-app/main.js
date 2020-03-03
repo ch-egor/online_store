@@ -3,8 +3,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-import 'bootstrap';
-import './style.scss'
+import(/* webpackChunkName: "bootstrap" */'bootstrap');
+import(/* webpackChunkName: "bootstrap" */"./bootstrap.scss");
 
 Vue.config.productionTip = false
 
