@@ -27,6 +27,19 @@ class SecurityController extends AbstractController
     }
 
     /**
+     * @Route("/api/login", name="app_json_login", methods={"POST"})
+     */
+    public function jsonLogin(): Response
+    {
+        $user = $this->getUser();
+
+        return $this->json([
+            'username' => $user->getUsername(),
+            'roles' => $user->getRoles(),
+        ]);
+    }
+
+    /**
      * @Route("/logout", name="app_logout")
      */
     public function logout()
