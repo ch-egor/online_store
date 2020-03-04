@@ -15,13 +15,49 @@
           <router-link class="nav-link" to="/about" active-class="active">About</router-link>
         </li>
       </ul>
+
+      <ul class="navbar-nav">
+        <li class="nav-item" v-if="isLoggedIn">
+          <a class="nav-link">{{ username }}</a>
+        </li>
+        <li class="nav-item" v-if="isLoggedIn">
+          <a href="#" role="button" class="btn-link nav-link" @click.prevent="signOut">Sign Out</a>
+        </li>
+      </ul>
     </div>
   </nav>
 </template>
 
 <script>
+  import securityApi from "../api/security";
+
   export default {
-    name: "Navbar"
+    name: "Navbar",
+    data() {
+      return {
+        username: null,
+
+        get isLoggedIn() {
+          return this.username !== null;
+        },
+      }
+    },
+    methods: {
+      async signOut() {
+        const response = await securityApi.logout();
+
+        if (response.data.success === true) {
+          this.username = null;
+        }
+      }
+    },
+    async mounted() {
+      const response = await securityApi.userInfo();
+
+      if (response.data !== null) {
+        this.$data.username = response.data.username;
+      }
+    }
   };
 </script>
 

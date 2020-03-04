@@ -24,6 +24,7 @@ security:
                 check_path: app_json_login
             logout:
                 path: app_logout
+                success_handler: App\Security\LogoutSuccessHandler
                 # where to redirect after logout
                 # target: app_any_route
 

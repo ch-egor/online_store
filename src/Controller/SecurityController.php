@@ -40,6 +40,14 @@ class SecurityController extends AbstractController
     }
 
     /**
+     * @Route("/api/user_info", name="app_user_info", methods={"POST"})
+     */
+    public function userInfo(): Response
+    {
+        return $this->json($this->getUser());
+    }
+
+    /**
      * @Route("/logout", name="app_logout")
      */
     public function logout()
