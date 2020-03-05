@@ -2,7 +2,7 @@
   <div id="app">
     <Navbar/>
 
-    <main role="main" class="container mt-5">
+    <main role="main" class="container">
       <router-view/>
     </main><!-- /.container -->
   </div>
@@ -22,4 +22,7 @@
 </script>
 
 <style lang="scss">
+  main {
+    margin-top: 3.5rem;
+  }
 </style>
