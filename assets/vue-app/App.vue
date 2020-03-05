@@ -14,12 +14,12 @@
   export default {
     components: {
       Navbar
+    },
+    mounted() {
+      this.$store.dispatch('getUserInfo');
     }
   };
 </script>
 
 <style lang="scss">
-  .router-link-exact-active {
-    color: #fff !important;
-  }
 </style>
