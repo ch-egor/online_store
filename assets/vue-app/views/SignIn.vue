@@ -1,14 +1,15 @@
 <template>
   <form class="form-signin">
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <div class="text-danger" v-show="isError">An error occurred.</div>
 
     <label for="inputEmail" class="sr-only">Email address</label>
     <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus
-           v-model="username">
+           v-model="username" @input="resetError">
 
     <label for="inputPassword" class="sr-only">Password</label>
     <input type="password" id="inputPassword" class="form-control mb-3" placeholder="Password" required
-           v-model="password">
+           v-model="password" @input="resetError">
 
     <button class="btn btn-lg btn-primary btn-block" type="submit" @click.prevent="signIn">Sign in</button>
   </form>
@@ -19,17 +20,26 @@
     name: "SignIn",
     data() {
       return {
+        isError: false,
         username: '',
         password: ''
       };
     },
     methods: {
       async signIn() {
-        await this.$store.dispatch('signIn', {
-          username: this.username,
-          password: this.password
-        });
-        this.$router.replace('/');
+        try {
+          await this.$store.dispatch('signIn', {
+            username: this.username,
+            password: this.password
+          });
+          this.$router.replace('/');
+        } catch (e) {
+          this.isError = true;
+        }
+      },
+
+      resetError() {
+        this.isError = false;
       }
     }
   }
