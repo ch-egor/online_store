@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>{{ object.title }}</h2>
-    <p>{{ object.description }}</p>
+    <p>{{ shortDescription }}</p>
     <p>
       <router-link :to="{ name: 'article', params: { id: object.id } }" class="btn btn-secondary">
         View details »
@@ -13,7 +13,13 @@
 <script>
   export default {
     name: "ArticlePreview",
-    props: ['object']
+    props: ['object'],
+    computed: {
+      shortDescription() {
+        const description = this.object.description;
+        return description.length < 200 ? description : description.substr(0, 200) + '…';
+      }
+    }
   }
 </script>
 
