@@ -1,36 +1,33 @@
 <template>
-  <div class="home">
-    <ul>
-      <li v-for="category in categories">{{ category.title }}</li>
-    </ul>
-
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="row">
+    <div class="col-sm-4" v-for="article in articles">
+      <Article :object="article"/>
+    </div>
   </div>
 </template>
 
 <script>
-  import categoryApi from '../api/category';
-  import HelloWorld from '../components/HelloWorld.vue';
+  import articleApi from '../api/article';
+  import Article from "../components/Article";
 
   export default {
     name: 'home',
     components: {
-      HelloWorld
+      Article
     },
     data() {
       return {
-        categories: []
+        articles: []
       }
     },
     methods: {
-      async initCategories() {
-        const response = await categoryApi.get();
-        this.categories = response.data;
+      async initArticles() {
+        const response = await articleApi.get();
+        this.articles = response.data;
       }
     },
     mounted() {
-      this.initCategories();
+      this.initArticles();
     }
   };
 </script>

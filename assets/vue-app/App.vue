@@ -22,7 +22,7 @@
 </script>
 
 <style lang="scss">
-  main {
+  #app > main {
     margin-top: 3.5rem;
   }
 </style>

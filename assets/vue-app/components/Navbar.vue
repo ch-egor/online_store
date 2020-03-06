@@ -11,6 +11,13 @@
         <li class="nav-item">
           <router-link class="nav-link" to="/" exact-active-class="active">Home</router-link>
         </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown"
+             aria-haspopup="true" aria-expanded="false">Categories</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown01">
+            <a class="dropdown-item" href="#" v-for="category in categories">{{ category.title }}</a>
+          </div>
+        </li>
         <li class="nav-item">
           <router-link class="nav-link" to="/about" exact-active-class="active">About</router-link>
         </li>
@@ -33,10 +40,21 @@
 
 <script>
   import {mapGetters, mapState} from "vuex";
+  import categoryApi from '../api/category';
 
   export default {
     name: "Navbar",
+    data() {
+      return {
+        categories: []
+      }
+    },
     methods: {
+      async initCategories() {
+        const response = await categoryApi.get();
+        this.categories = response.data;
+      },
+
       async signOut() {
         await this.$store.dispatch('signOut');
         this.$router.push('/');
@@ -45,9 +63,13 @@
     computed: {
       ...mapState(['username']),
       ...mapGetters(['isLoggedIn'])
+    },
+    mounted() {
+      this.initCategories();
     }
   };
 </script>
 
 <style scoped lang="scss">
+
 </style>
