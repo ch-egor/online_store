@@ -1,5 +1,8 @@
 <template>
   <div class="row">
+    <div class="col-12">
+      <h1>Articles</h1>
+    </div>
     <div class="col-sm-4" v-for="article in articles">
       <ArticlePreview :object="article"/>
     </div>

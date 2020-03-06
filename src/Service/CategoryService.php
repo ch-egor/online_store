@@ -17,4 +17,9 @@ class CategoryService
     {
         return $this->categoryRepo->findAll();
     }
+
+    public function getById($id)
+    {
+        return $this->categoryRepo->find($id);
+    }
 }

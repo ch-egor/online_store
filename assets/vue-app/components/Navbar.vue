@@ -15,7 +15,10 @@
           <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown"
              aria-haspopup="true" aria-expanded="false">Categories</a>
           <div class="dropdown-menu" aria-labelledby="dropdown01">
-            <a class="dropdown-item" href="#" v-for="category in categories">{{ category.title }}</a>
+            <router-link v-for="category in categories" class="dropdown-item"
+                         :to="{ name: 'category', params: { id: category.id } }">
+              {{ category.title }}
+            </router-link>
           </div>
         </li>
         <li class="nav-item">

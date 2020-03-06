@@ -21,4 +21,13 @@ class CategoryController extends AbstractController
         $categories = $categoryService->get();
         return $this->json($categories);
     }
+
+    /**
+     * @Route("/{id}", methods={"GET"})
+     */
+    public function getCategory($id, Request $request, CategoryService $categoryService): Response
+    {
+        $category = $categoryService->getById($id);
+        return $this->json($category);
+    }
 }

@@ -18,14 +18,16 @@ class ArticleController extends AbstractController
      */
     public function getArticles(Request $request, ArticleService $articleService): Response
     {
-        $articles = $articleService->get();
+        $categoryId = $request->query->get('category');
+        $articles = $articleService->get($categoryId);
+
         return $this->json($articles);
     }
 
     /**
      * @Route("/{id}", methods={"GET"})
      */
-    public function getArticle(Request $request, $id, ArticleService $articleService): Response
+    public function getArticle($id, Request $request, ArticleService $articleService): Response
     {
         $article = $articleService->getById($id);
         return $this->json($article);

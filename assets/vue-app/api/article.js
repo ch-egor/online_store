@@ -1,8 +1,10 @@
 import axios from 'axios';
 
 export default {
-  get() {
-    return axios.get('/api/article');
+  get(category = null) {
+    return axios.get('/api/article', {
+      params: { category }
+    });
   },
 
   getById(id) {
