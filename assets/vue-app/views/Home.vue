@@ -1,19 +1,19 @@
 <template>
   <div class="row">
     <div class="col-sm-4" v-for="article in articles">
-      <Article :object="article"/>
+      <ArticlePreview :object="article"/>
     </div>
   </div>
 </template>
 
 <script>
   import articleApi from '../api/article';
-  import Article from "../components/Article";
+  import ArticlePreview from "../components/ArticlePreview";
 
   export default {
     name: 'home',
     components: {
-      Article
+      ArticlePreview
     },
     data() {
       return {

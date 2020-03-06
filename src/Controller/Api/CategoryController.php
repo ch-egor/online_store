@@ -2,7 +2,7 @@
 
 namespace App\Controller\Api;
 
-use App\Repository\CategoryRepository;
+use App\Service\CategoryService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,10 +16,9 @@ class CategoryController extends AbstractController
     /**
      * @Route("/", methods={"GET"})
      */
-    public function getCategories(Request $request, CategoryRepository $categoryRepo): Response
+    public function getCategories(Request $request, CategoryService $categoryService): Response
     {
-        $categories = $categoryRepo->findAll();
-
+        $categories = $categoryService->get();
         return $this->json($categories);
     }
 }

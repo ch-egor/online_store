@@ -2,13 +2,17 @@
   <div>
     <h2>{{ object.title }}</h2>
     <p>{{ object.description }}</p>
-    <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
+    <p>
+      <router-link :to="{ name: 'article', params: { id: object.id } }" class="btn btn-secondary">
+        View details »
+      </router-link>
+    </p>
   </div>
 </template>
 
 <script>
   export default {
-    name: "Article",
+    name: "ArticlePreview",
     props: ['object']
   }
 </script>
