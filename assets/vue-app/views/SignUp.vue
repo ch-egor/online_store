@@ -1,39 +1,39 @@
 <template>
   <form class="form-signin">
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
     <div class="text-danger" v-show="isError">An error occurred.</div>
 
     <label for="inputEmail" class="sr-only">Email address</label>
     <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus
-           v-model="username" @input="resetError">
+           v-model="email" @input="resetError">
 
     <label for="inputPassword" class="sr-only">Password</label>
     <input type="password" id="inputPassword" class="form-control mb-3" placeholder="Password" required
            v-model="password" @input="resetError">
 
-    <button class="btn btn-lg btn-primary btn-block" type="submit" @click.prevent="signIn">Sign in</button>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" @click.prevent="signUp">Sign up</button>
   </form>
 </template>
 
 <script>
+  import securityApi from "../api/security";
+
   export default {
-    name: "SignIn",
+    name: "SignUp",
     data() {
       return {
         isError: false,
-        username: '',
+        email: '',
         password: ''
       };
     },
     methods: {
-      async signIn() {
-        try {
-          await this.$store.dispatch('signIn', {
-            username: this.username,
-            password: this.password
-          });
-          this.$router.replace('/');
-        } catch (e) {
+      async signUp() {
+        const response = await securityApi.signUp(this.email, this.password);
+
+        if (response.data.success === true) {
+          this.$router.replace({name: 'signIn'});
+        } else {
           this.isError = true;
         }
       },

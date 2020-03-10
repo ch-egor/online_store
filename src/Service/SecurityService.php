@@ -5,16 +5,22 @@ namespace App\Service;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class SecurityService
 {
     protected $em;
     protected $userRepo;
+    protected $passwordEncoder;
 
-    public function __construct(EntityManagerInterface $em, UserRepository $userRepo)
-    {
+    public function __construct(
+        EntityManagerInterface $em,
+        UserRepository $userRepo,
+        UserPasswordEncoderInterface $passwordEncoder
+    ) {
         $this->em = $em;
         $this->userRepo = $userRepo;
+        $this->passwordEncoder = $passwordEncoder;
     }
 
     public function signUp(?string $email, ?string $password): bool
@@ -29,7 +35,7 @@ class SecurityService
         $user = new User();
         $user
             ->setEmail($email)
-            ->setPassword($password)
+            ->setPassword($this->passwordEncoder->encodePassword($user, $password))
             ->setRoles(['ROLE_USER']);
 
         $this->em->persist($user);

@@ -28,8 +28,12 @@
 
       <ul class="navbar-nav">
         <li class="nav-item" v-if="!isLoggedIn">
+          <router-link class="nav-link" to="/sign-up" exact-active-class="active">Sign Up</router-link>
+        </li>
+        <li class="nav-item" v-if="!isLoggedIn">
           <router-link class="nav-link" to="/sign-in" exact-active-class="active">Sign In</router-link>
         </li>
+
         <li class="nav-item" v-if="isLoggedIn">
           <a class="nav-link">{{ username }}</a>
         </li>
