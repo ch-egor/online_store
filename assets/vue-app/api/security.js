@@ -14,5 +14,12 @@ export default {
 
   userInfo() {
     return axios.post('/api/user_info');
+  },
+
+  signUp(email, password) {
+    return axios.post('/api/sign_up', {
+      email,
+      password
+    });
   }
 };
