@@ -6,7 +6,7 @@ export default {
   },
 
   updateItem(articleId, quantity = 1) {
-    return axios.post(`/api/article/items/${articleId}`, {
+    return axios.post(`/api/order/items/${articleId}`, {
       quantity
     });
   },

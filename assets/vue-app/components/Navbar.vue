@@ -16,24 +16,30 @@
              aria-haspopup="true" aria-expanded="false">Categories</a>
           <div class="dropdown-menu" aria-labelledby="dropdown01">
             <router-link v-for="category in categories" class="dropdown-item"
-                         :to="{ name: 'category', params: { id: category.id } }">
+                         :to="{ name: 'category', params: { id: category.id } }"
+                         :key="category.id">
               {{ category.title }}
             </router-link>
           </div>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="/about" exact-active-class="active">About</router-link>
+          <router-link class="nav-link" :to="{ name: 'about' }" exact-active-class="active">About</router-link>
         </li>
       </ul>
 
       <ul class="navbar-nav">
         <li class="nav-item" v-if="!isLoggedIn">
-          <router-link class="nav-link" to="/sign-up" exact-active-class="active">Sign Up</router-link>
+          <router-link class="nav-link" :to="{ name: 'signUp' }" exact-active-class="active">Sign Up</router-link>
         </li>
         <li class="nav-item" v-if="!isLoggedIn">
-          <router-link class="nav-link" to="/sign-in" exact-active-class="active">Sign In</router-link>
+          <router-link class="nav-link" :to="{ name: 'signIn' }" exact-active-class="active">Sign In</router-link>
         </li>
 
+        <li class="nav-item" v-if="isLoggedIn">
+          <router-link class="nav-link" :to="{ name: 'cart' }" exact-active-class="active">
+            <i class="fas fa-shopping-cart"></i>
+          </router-link>
+        </li>
         <li class="nav-item" v-if="isLoggedIn">
           <a class="nav-link">{{ username }}</a>
         </li>
