@@ -31,7 +31,7 @@ class OrderItem
      * @ORM\ManyToOne(targetEntity="App\Entity\Order", inversedBy="orderItems")
      * @ORM\JoinColumn(nullable=false, name="order_id", referencedColumnName="id")
      */
-    private $orderObj;
+    private $order;
 
     public function getId(): ?int
     {
@@ -62,14 +62,14 @@ class OrderItem
         return $this;
     }
 
-    public function getOrderObj(): ?Order
+    public function getOrder(): ?Order
     {
-        return $this->orderObj;
+        return $this->order;
     }
 
-    public function setOrderObj(?Order $orderObj): self
+    public function setOrder(?Order $order): self
     {
-        $this->orderObj = $orderObj;
+        $this->order = $order;
 
         return $this;
     }

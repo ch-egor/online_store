@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Entity\Article;
 use App\Repository\ArticleRepository;
 
 class ArticleService
@@ -28,7 +29,7 @@ class ArticleService
         return $this->articleRepo->findAll();
     }
 
-    public function getById($id)
+    public function getById($id): ?Article
     {
         return $this->articleRepo->find($id);
     }

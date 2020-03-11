@@ -2,11 +2,11 @@
 
 namespace App\Serializer;
 
-use App\Entity\User;
+use App\Entity\Category;
 use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
-class UserNormalizer implements ContextAwareNormalizerInterface
+class CategoryNormalizer implements ContextAwareNormalizerInterface
 {
     private $normalizer;
 
@@ -17,14 +17,11 @@ class UserNormalizer implements ContextAwareNormalizerInterface
 
     /**
      * @inheritDoc
-     * @param User $object
+     * @param Category $object
      */
     public function normalize($object, string $format = null, array $context = [])
     {
         $data = $this->normalizer->normalize($object, $format, $context);
-
-        unset($data['password']);
-        unset($data['salt']);
 
         return $data;
     }
@@ -34,6 +31,6 @@ class UserNormalizer implements ContextAwareNormalizerInterface
      */
     public function supportsNormalization($data, string $format = null, array $context = [])
     {
-        return $data instanceof User;
+        return $data instanceof Category;
     }
 }

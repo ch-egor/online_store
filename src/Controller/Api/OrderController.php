@@ -2,6 +2,7 @@
 
 namespace App\Controller\Api;
 
+use App\Service\ArticleService;
 use App\Service\OrderService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,22 +20,41 @@ class OrderController extends AbstractController
     public function getCurrentOrder(Request $request, OrderService $orderService): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
-        $order = $orderService->getCurrentOrder($this->getUser());
+
+        $user = $this->getUser();
+        $order = $orderService->getCurrentOrder($user);
 
         return $this->json($order);
     }
 
-    public function addItem(Request $request, OrderService $orderService): Response
+    /**
+     * @Route("/items/{articleId}", methods={"POST"})
+     */
+    public function updateItem($articleId, Request $request, ArticleService $articleService, OrderService $orderService): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
 
-        return $this->json([]);
+        $user = $this->getUser();
+        $article = $articleService->getById($articleId);
+        $quantity = $request->request->getInt('quantity', 1);
+
+        return $this->json([
+            'success' => $orderService->updateItem($user, $article, $quantity),
+        ]);
     }
 
-    public function removeItem(Request $request, OrderService $orderService): Response
+    /**
+     * @Route("/items/{articleId}", methods={"DELETE"})
+     */
+    public function removeItem($articleId, Request $request, ArticleService $articleService, OrderService $orderService): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
 
-        return $this->json([]);
+        $user = $this->getUser();
+        $article = $articleService->getById($articleId);
+
+        return $this->json([
+            'success' => $orderService->removeItem($user, $article),
+        ]);
     }
 }
