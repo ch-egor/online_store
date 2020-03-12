@@ -2,7 +2,9 @@ import orderApi from "../api/order";
 
 export default {
   state: {
-    order: null,
+    order: {
+      orderItems: [],
+    },
   },
   getters: {
     itemCount: state => state.order.orderItems.length,

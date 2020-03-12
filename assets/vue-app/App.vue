@@ -17,6 +17,7 @@
     },
     mounted() {
       this.$store.dispatch('getUserInfo');
+      this.$store.dispatch('getCurrentOrder');
     }
   };
 </script>

@@ -6,7 +6,7 @@
       <router-link :to="{ name: 'article', params: { id: object.id } }" class="btn btn-secondary">
         View details »
       </router-link>
-      <button type="button" class="btn btn-light" @click="addItemToCart">
+      <button type="button" class="btn btn-light" @click="updateItem({ article: object, quantity: 1 })">
         <i class="fas fa-shopping-cart"></i> +1
       </button>
     </p>
@@ -14,15 +14,13 @@
 </template>
 
 <script>
-  import orderApi from "../api/order";
+  import {mapActions} from "vuex";
 
   export default {
     name: "ArticlePreview",
     props: ['object'],
     methods: {
-      addItemToCart() {
-        orderApi.updateItem(this.object.id);
-      }
+      ...mapActions(['updateItem']),
     },
     computed: {
       shortDescription() {

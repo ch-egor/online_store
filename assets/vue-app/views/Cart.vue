@@ -14,30 +14,17 @@
 </template>
 
 <script>
-  import orderApi from "../api/order";
+  import {mapActions, mapState} from "vuex";
 
   export default {
     name: "Cart",
-    data() {
-      return {
-        items: []
-      };
+    computed: {
+      ...mapState({
+        items: state => state.order.order.orderItems,
+      }),
     },
     methods: {
-      async removeItem(item) {
-        const response = await orderApi.removeItem(item.article.id);
-        this.items.splice(this.items.indexOf(item), 1);
-
-        this.initItems();
-      },
-
-      async initItems() {
-        const response = await orderApi.getCurrent();
-        this.items = response.data.orderItems;
-      }
-    },
-    mounted() {
-      this.initItems();
+      ...mapActions(['removeItem']),
     }
   }
 </script>
