@@ -74,7 +74,9 @@
       }
     },
     computed: {
-      ...mapState(['username']),
+      ...mapState({
+        username: state => state.security.username
+      }),
       ...mapGetters(['isLoggedIn'])
     },
     mounted() {
