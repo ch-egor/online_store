@@ -16,6 +16,12 @@ export default {
   },
   mutations: {
     updateOrder(state, order) {
+      if (typeof order !== 'object') {
+        throw new Error('Order must be an object.');
+      }
+      if (!Array.isArray(order.orderItems)) {
+        order.orderItems = [];
+      }
       state.order = order;
     },
 

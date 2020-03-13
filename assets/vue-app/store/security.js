@@ -18,14 +18,16 @@ export default {
       commit('updateUserInfo', response.data);
     },
 
-    async signIn({ commit }, { username, password }) {
+    async signIn({ commit, dispatch }, { username, password }) {
       const response = await securityApi.login(username, password);
       commit('updateUserInfo', response.data);
+      dispatch('getCurrentOrder');
     },
 
     async signOut({ commit }) {
       await securityApi.logout();
       commit('updateUserInfo', null);
+      commit('updateOrder', {});
     },
   }
 };

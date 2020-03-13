@@ -28,24 +28,28 @@
       </ul>
 
       <ul class="navbar-nav">
-        <li class="nav-item" v-if="!isLoggedIn">
-          <router-link class="nav-link" :to="{ name: 'signUp' }" exact-active-class="active">Sign Up</router-link>
-        </li>
-        <li class="nav-item" v-if="!isLoggedIn">
-          <router-link class="nav-link" :to="{ name: 'signIn' }" exact-active-class="active">Sign In</router-link>
-        </li>
-
-        <li class="nav-item" v-if="isLoggedIn">
-          <router-link class="nav-link" :to="{ name: 'cart' }" exact-active-class="active">
-            <i class="fas fa-shopping-cart"></i>
-          </router-link>
-        </li>
-        <li class="nav-item" v-if="isLoggedIn">
-          <a class="nav-link">{{ username }}</a>
-        </li>
-        <li class="nav-item" v-if="isLoggedIn">
-          <a href="#" role="button" class="btn-link nav-link" @click.prevent="signOut">Sign Out</a>
-        </li>
+        <template v-if="isLoggedIn">
+          <li class="nav-item">
+            <router-link class="nav-link" :to="{ name: 'cart' }" exact-active-class="active" key="cart">
+              <i class="fas fa-shopping-cart"></i>
+              {{ itemCount }}
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">{{ username }}</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" role="button" class="btn-link nav-link" @click.prevent="signOut">Sign Out</a>
+          </li>
+        </template>
+        <template v-else>
+          <li class="nav-item">
+            <router-link class="nav-link" :to="{ name: 'signUp' }" exact-active-class="active">Sign Up</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" :to="{ name: 'signIn' }" exact-active-class="active">Sign In</router-link>
+          </li>
+        </template>
       </ul>
     </div>
   </nav>
@@ -70,14 +74,15 @@
 
       async signOut() {
         await this.$store.dispatch('signOut');
-        this.$router.push('/');
+        if (this.$route.name !== 'home')
+        this.$router.push({ name: 'home' });
       }
     },
     computed: {
       ...mapState({
         username: state => state.security.username
       }),
-      ...mapGetters(['isLoggedIn'])
+      ...mapGetters(['isLoggedIn', 'itemCount']),
     },
     mounted() {
       this.initCategories();

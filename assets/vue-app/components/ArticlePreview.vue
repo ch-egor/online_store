@@ -2,31 +2,55 @@
   <div>
     <h2>{{ object.title }}</h2>
     <p>{{ shortDescription }}</p>
-    <p>
-      <router-link :to="{ name: 'article', params: { id: object.id } }" class="btn btn-secondary">
-        View details »
-      </router-link>
-      <button type="button" class="btn btn-light" @click="updateItem({ article: object, quantity: 1 })">
-        <i class="fas fa-shopping-cart"></i> +1
-      </button>
+    <p><router-link :to="{ name: 'article', params: { id: object.id } }">View details »</router-link></p>
+    <p v-if="isLoggedIn">
+      <button type="button" class="btn btn-light" @click="incrementItem">+</button>
+      <i class="fas fa-shopping-cart"></i>
+      {{ quantity }}
+      <button type="button" class="btn btn-light" @click="decrementItem" :disabled="quantity <= 0">-</button>
+      <button type="button" class="btn btn-danger" @click="removeItem" :disabled="quantity <= 0">Remove</button>
     </p>
   </div>
 </template>
 
 <script>
-  import {mapActions} from "vuex";
+  import {mapGetters} from "vuex";
 
   export default {
     name: "ArticlePreview",
     props: ['object'],
     methods: {
-      ...mapActions(['updateItem']),
+      incrementItem() {
+        this.$store.dispatch('updateItem', {
+          article: this.object,
+          quantity: this.quantity + 1
+        });
+      },
+
+      decrementItem() {
+        this.$store.dispatch('updateItem', {
+          article: this.object,
+          quantity: this.quantity - 1
+        });
+      },
+
+      removeItem() {
+        this.$store.dispatch('removeItem', {
+          article: this.object
+        });
+      },
     },
     computed: {
+      ...mapGetters(['isLoggedIn']),
+
       shortDescription() {
         const description = this.object.description;
         return description.length <= 200 ? description : description.substr(0, 200) + '…';
-      }
+      },
+
+      quantity() {
+        return this.$store.getters.getArticleQuantity(this.object);
+      },
     }
   }
 </script>

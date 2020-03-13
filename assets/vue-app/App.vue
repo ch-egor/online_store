@@ -15,9 +15,12 @@
     components: {
       Navbar
     },
-    mounted() {
-      this.$store.dispatch('getUserInfo');
-      this.$store.dispatch('getCurrentOrder');
+    async mounted() {
+      await this.$store.dispatch('getUserInfo');
+
+      if (this.$store.getters.isLoggedIn) {
+        this.$store.dispatch('getCurrentOrder');
+      }
     }
   };
 </script>
