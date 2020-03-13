@@ -38,6 +38,10 @@ class OrderController extends AbstractController
         $article = $articleService->getById($articleId);
         $quantity = $request->request->getInt('quantity', 1);
 
+        if (!$article->getInStock()) {
+            throw $this->createAccessDeniedException('Item is out of stock.');
+        }
+
         return $this->json([
             'success' => $orderService->updateItem($user, $article, $quantity),
         ]);

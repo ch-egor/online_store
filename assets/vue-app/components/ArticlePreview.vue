@@ -4,11 +4,17 @@
     <p>{{ shortDescription }}</p>
     <p><router-link :to="{ name: 'article', params: { id: object.id } }">View details »</router-link></p>
     <p v-if="isLoggedIn">
-      <button type="button" class="btn btn-light" @click="incrementItem">+</button>
-      <i class="fas fa-shopping-cart"></i>
-      {{ quantity }}
-      <button type="button" class="btn btn-light" @click="decrementItem" :disabled="quantity <= 0">-</button>
-      <button type="button" class="btn btn-danger" @click="removeItem" :disabled="quantity <= 0">Remove</button>
+      <template v-if="object.inStock">
+        <button type="button" class="btn btn-light" @click="incrementItem">+</button>
+        <i class="fas fa-shopping-cart"></i>
+        {{ quantity }}
+        <button type="button" class="btn btn-light" @click="decrementItem" :disabled="quantity <= 0">-</button>
+        <button type="button" class="btn btn-danger" @click="removeItem" :disabled="quantity <= 0">Remove</button>
+      </template>
+      <template v-else>
+        Out of stock
+        <button type="button" class="btn btn-danger" @click="removeItem" v-if="quantity > 0">Remove</button>
+      </template>
     </p>
   </div>
 </template>
