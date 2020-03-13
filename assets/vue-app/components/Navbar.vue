@@ -74,8 +74,9 @@
 
       async signOut() {
         await this.$store.dispatch('signOut');
-        if (this.$route.name !== 'home')
-        this.$router.push({ name: 'home' });
+        if (this.$route.name !== 'home') {
+          this.$router.push({name: 'home'});
+        }
       }
     },
     computed: {
