@@ -31,6 +31,10 @@ class ExceptionSubscriber implements EventSubscriberInterface
 
     public function runVueApp(ExceptionEvent $event)
     {
+        if (preg_match('/^\/api\//', $event->getRequest()->getPathInfo())) {
+            return;
+        }
+
         if ($event->getThrowable() instanceof NotFoundHttpException) {
             $event->allowCustomResponseCode();
 
