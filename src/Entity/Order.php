@@ -73,7 +73,7 @@ class Order
     {
         if (!$this->orderItems->contains($orderItem)) {
             $this->orderItems[] = $orderItem;
-            $orderItem->setOrderObj($this);
+            $orderItem->setOrder($this);
         }
 
         return $this;
@@ -84,8 +84,8 @@ class Order
         if ($this->orderItems->contains($orderItem)) {
             $this->orderItems->removeElement($orderItem);
             // set the owning side to null (unless already changed)
-            if ($orderItem->getOrderObj() === $this) {
-                $orderItem->setOrderObj(null);
+            if ($orderItem->getOrder() === $this) {
+                $orderItem->setOrder(null);
             }
         }
 
