@@ -27,6 +27,14 @@
                 <th>InStock</th>
                 <td>{{ article.inStock ? 'Yes' : 'No' }}</td>
             </tr>
+            <tr>
+                <th>Created At</th>
+                <td>{{ article.createdAt | date }}</td>
+            </tr>
+            <tr>
+                <th>Updated At</th>
+                <td>{{ article.updatedAt | date }}</td>
+            </tr>
         </tbody>
     </table>
 

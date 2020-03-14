@@ -19,6 +19,14 @@
                 <th>Slug</th>
                 <td>{{ category.slug }}</td>
             </tr>
+            <tr>
+                <th>Created At</th>
+                <td>{{ category.createdAt | date }}</td>
+            </tr>
+            <tr>
+                <th>Updated At</th>
+                <td>{{ category.updatedAt | date }}</td>
+            </tr>
         </tbody>
     </table>
 

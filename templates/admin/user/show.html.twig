@@ -19,6 +19,14 @@
                 <th>Roles</th>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
             </tr>
+            <tr>
+                <th>Created At</th>
+                <td>{{ user.createdAt | date }}</td>
+            </tr>
+            <tr>
+                <th>Updated At</th>
+                <td>{{ user.updatedAt | date }}</td>
+            </tr>
         </tbody>
     </table>
 
