@@ -3,6 +3,10 @@
 <div>
     Items per page:
     {% for limit in limits %}
-        <a href="{{ path(app.request.attributes.get('_route'), { limit: limit }) }}">{{ limit }}</a>
+        {% if limit == app.request.session.get('limit', 10) %}
+            <b>{{ limit }}</b>
+        {% else %}
+            <a href="{{ path(app.request.attributes.get('_route'), { limit: limit }) }}">{{ limit }}</a>
+        {% endif %}
     {% endfor %}
 </div>

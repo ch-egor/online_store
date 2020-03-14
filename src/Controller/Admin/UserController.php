@@ -29,7 +29,7 @@ class UserController extends AbstractController
 
         $query = $userRepository->createQueryBuilder('u')->getQuery();
         $page = $request->query->getInt('page', 1);
-        $limit = $request->getSession()->get('limit');
+        $limit = $request->getSession()->get('limit', 10);
 
         return $this->render('admin/user/index.html.twig', [
             'pagination' => $paginator->paginate($query, $page, $limit),

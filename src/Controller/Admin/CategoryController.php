@@ -27,7 +27,7 @@ class CategoryController extends AbstractController
 
         $query = $categoryRepository->createQueryBuilder('c')->getQuery();
         $page = $request->query->getInt('page', 1);
-        $limit = $request->getSession()->get('limit');
+        $limit = $request->getSession()->get('limit', 10);
 
         return $this->render('admin/category/index.html.twig', [
             'pagination' => $paginator->paginate($query, $page, $limit),
