@@ -9,6 +9,14 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class SecurityService
 {
+    public const ROLE_USER = 'ROLE_USER';
+    public const ROLE_ADMIN = 'ROLE_ADMIN';
+
+    public const LABELS_ROLE = [
+        self::ROLE_USER => 'User',
+        self::ROLE_ADMIN => 'Administrator'
+    ];
+
     protected $em;
     protected $userRepo;
     protected $passwordEncoder;

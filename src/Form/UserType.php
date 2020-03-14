@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\User;
+use App\Service\SecurityService;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,7 +15,10 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email')
-            ->add('roles', Type\CollectionType::class)
+            ->add('roles', Type\ChoiceType::class, [
+                'choices' => array_flip(SecurityService::LABELS_ROLE),
+                'multiple' => true,
+            ])
             ->add('password', Type\PasswordType::class)
         ;
     }

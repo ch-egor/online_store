@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Service\SecurityService;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -74,6 +75,15 @@ class User implements UserInterface
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
+    }
+
+    public function getRoleLabels(): string
+    {
+        $labels = array_map(function ($role) {
+            return SecurityService::LABELS_ROLE[$role];
+        }, $this->getRoles());
+
+        return implode(', ', $labels);
     }
 
     public function setRoles(array $roles): self
