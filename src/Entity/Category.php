@@ -2,12 +2,11 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Category
 {
@@ -22,6 +21,9 @@ class Category
      * @ORM\Column(type="string", length=255)
      */
     private $title;
+
+    use Traits\CreatedAt;
+    use Traits\UpdatedAt;
 
     public function getId(): ?int
     {

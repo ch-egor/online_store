@@ -7,6 +7,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class User implements UserInterface
 {
@@ -32,6 +33,9 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    use Traits\CreatedAt;
+    use Traits\UpdatedAt;
 
     public function getId(): ?int
     {

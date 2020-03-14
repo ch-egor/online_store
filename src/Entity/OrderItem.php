@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\OrderItemRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class OrderItem
 {
@@ -32,6 +33,9 @@ class OrderItem
      * @ORM\JoinColumn(nullable=false, name="order_id", referencedColumnName="id")
      */
     private $order;
+
+    use Traits\CreatedAt;
+    use Traits\UpdatedAt;
 
     public function getId(): ?int
     {
