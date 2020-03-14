@@ -22,6 +22,11 @@ class Category
      */
     private $title;
 
+    /**
+     * @ORM\Column(type="string", length=63)
+     */
+    private $slug;
+
     use Traits\CreatedAt;
     use Traits\UpdatedAt;
 
@@ -38,6 +43,18 @@ class Category
     public function setTitle(string $title): self
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

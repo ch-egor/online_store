@@ -18,15 +18,21 @@ class AppFixtures extends Fixture
     private function loadCategories(ObjectManager $manager)
     {
         $fruits = new Category();
-        $fruits->setTitle('Fruits');
+        $fruits
+            ->setTitle('Fruits')
+            ->setSlug('fruits');
         $manager->persist($fruits);
 
         $vegetables = new Category();
-        $vegetables->setTitle('Vegetables');
+        $vegetables
+            ->setTitle('Vegetables')
+            ->setSlug('vegetables');
         $manager->persist($vegetables);
 
         $other = new Category();
-        $other->setTitle('Other');
+        $other
+            ->setTitle('Other')
+            ->setSlug('other');
         $manager->persist($other);
 
         $manager->flush();

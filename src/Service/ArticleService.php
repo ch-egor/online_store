@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Article;
+use App\Entity\Category;
 use App\Repository\ArticleRepository;
 
 class ArticleService
@@ -14,14 +15,14 @@ class ArticleService
         $this->articleRepo = $articleRepo;
     }
 
-    public function get($categoryId = null)
+    public function get(Category $category = null)
     {
-        if ($categoryId !== null) {
+        if ($category !== null) {
             return $this->articleRepo
                 ->createQueryBuilder('a')
                 ->leftJoin('a.category', 'c')
                 ->where('c.id = :categoryId')
-                ->setParameter('categoryId', $categoryId)
+                ->setParameter('categoryId', $category->getId())
                 ->getQuery()
                 ->getResult();
         }

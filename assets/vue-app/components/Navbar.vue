@@ -16,7 +16,7 @@
              aria-haspopup="true" aria-expanded="false">Categories</a>
           <div class="dropdown-menu" aria-labelledby="dropdown01">
             <router-link v-for="category in categories" class="dropdown-item"
-                         :to="{ name: 'category', params: { id: category.id } }"
+                         :to="{ name: 'category', params: { id: category.slug } }"
                          :key="category.id">
               {{ category.title }}
             </router-link>

@@ -27,7 +27,7 @@ class CategoryController extends AbstractController
      */
     public function getCategory($id, Request $request, CategoryService $categoryService): Response
     {
-        $category = $categoryService->getById($id);
+        $category = $categoryService->getByIdOrSlug($id);
         return $this->json($category);
     }
 }

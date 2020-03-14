@@ -18,8 +18,12 @@ class CategoryService
         return $this->categoryRepo->findAll();
     }
 
-    public function getById($id)
+    public function getByIdOrSlug($id)
     {
-        return $this->categoryRepo->find($id);
+        if (is_numeric($id)) {
+            return $this->categoryRepo->find($id);
+        }
+
+        return $this->categoryRepo->findOneBy(['slug' => $id]);
     }
 }
