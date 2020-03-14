@@ -48,7 +48,8 @@
     mounted() {
       this.init();
     },
-    beforeRouteUpdate() {
+    beforeRouteUpdate(to, from, next) {
+      next();
       this.init();
     }
   }

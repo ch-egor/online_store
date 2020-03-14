@@ -28,7 +28,8 @@
     mounted() {
       this.initArticle();
     },
-    beforeRouteUpdate() {
+    beforeRouteUpdate(to, from, next) {
+      next();
       this.initArticle();
     }
   }
