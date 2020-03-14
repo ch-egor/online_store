@@ -25,7 +25,6 @@ class ArticleController extends AbstractController
         $page = $request->query->getInt('page', 1);
 
         return $this->render('admin/article/index.html.twig', [
-            'articles' => $articleRepository->findAll(),
             'pagination' => $paginator->paginate($query, $page),
         ]);
     }
