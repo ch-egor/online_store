@@ -5,7 +5,7 @@ import store from './store'
 
 import(/* webpackChunkName: "bootstrap" */'bootstrap');
 import(/* webpackChunkName: "bootstrap" */"./bootstrap.scss");
-import '@fortawesome/fontawesome-free/js/all';
+import(/* webpackChunkName: "fontawesome" */'@fortawesome/fontawesome-free/css/all.css');
 
 Vue.config.productionTip = false
 

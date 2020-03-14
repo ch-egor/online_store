@@ -5,19 +5,22 @@
 {% block body %}
     <h1>Article index</h1>
 
+    <div class="count mb-2">
+        {{ pagination.getTotalItemCount }} items found
+    </div>
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Slug</th>
-                <th>Description</th>
-                <th>InStock</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Id', 'a.id') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Title', 'a.title') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Slug', 'a.slug') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Description', 'a.description') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'In Stock', 'a.inStock') }}</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for article in articles %}
+        {% for article in pagination %}
             <tr>
                 <td>{{ article.id }}</td>
                 <td>{{ article.title }}</td>
@@ -38,6 +41,9 @@
         {% endfor %}
         </tbody>
     </table>
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
 
     <a href="{{ path('article_new') }}">Create new</a>
 {% endblock %}
