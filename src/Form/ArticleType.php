@@ -26,7 +26,7 @@ class ArticleType extends AbstractType
     {
         $builder
             ->add('title')
-            ->slug('slug', Type\TextType::class, [
+            ->add('slug', Type\TextType::class, [
                 'required' => false,
             ])
             ->add('description')
