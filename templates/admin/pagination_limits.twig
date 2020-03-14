@@ -1,0 +1,8 @@
+{% set limits = [5, 10, 50, 100, 500] %}
+
+<div>
+    Items per page:
+    {% for limit in limits %}
+        <a href="{{ path(app.request.attributes.get('_route'), { limit: limit }) }}">{{ limit }}</a>
+    {% endfor %}
+</div>

@@ -23,11 +23,16 @@ class UserController extends AbstractController
      */
     public function index(Request $request, UserRepository $userRepository, PaginatorInterface $paginator): Response
     {
+        if ($limit = $request->query->getInt('limit')) {
+            $request->getSession()->set('limit', $limit);
+        }
+
         $query = $userRepository->createQueryBuilder('u')->getQuery();
         $page = $request->query->getInt('page', 1);
+        $limit = $request->getSession()->get('limit');
 
         return $this->render('admin/user/index.html.twig', [
-            'pagination' => $paginator->paginate($query, $page),
+            'pagination' => $paginator->paginate($query, $page, $limit),
         ]);
     }
 

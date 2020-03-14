@@ -21,11 +21,16 @@ class ArticleController extends AbstractController
      */
     public function index(Request $request, ArticleRepository $articleRepository, PaginatorInterface $paginator): Response
     {
+        if ($limit = $request->query->getInt('limit')) {
+            $request->getSession()->set('limit', $limit);
+        }
+
         $query = $articleRepository->createQueryBuilder('a')->getQuery();
         $page = $request->query->getInt('page', 1);
+        $limit = $request->getSession()->get('limit');
 
         return $this->render('admin/article/index.html.twig', [
-            'pagination' => $paginator->paginate($query, $page),
+            'pagination' => $paginator->paginate($query, $page, $limit),
         ]);
     }
 
