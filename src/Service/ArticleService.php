@@ -30,8 +30,12 @@ class ArticleService
         return $this->articleRepo->findAll();
     }
 
-    public function getById($id): ?Article
+    public function getByIdOrSlug($id): ?Article
     {
-        return $this->articleRepo->find($id);
+        if (is_numeric($id)) {
+            return $this->articleRepo->find($id);
+        }
+
+        return $this->articleRepo->findOneBy(['slug' => $id]);
     }
 }

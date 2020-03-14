@@ -19,7 +19,7 @@ trait CreatedAt
     /**
      * @ORM\PrePersist()
      */
-    public function setCreatedAt()
+    public function setCreatedAt(): void
     {
         $this->createdAt = new \DateTime();
     }

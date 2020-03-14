@@ -10,6 +10,7 @@
             <tr>
                 <th>Id</th>
                 <th>Title</th>
+                <th>Slug</th>
                 <th>Description</th>
                 <th>InStock</th>
                 <th>actions</th>
@@ -20,6 +21,7 @@
             <tr>
                 <td>{{ article.id }}</td>
                 <td>{{ article.title }}</td>
+                <td>{{ article.slug }}</td>
                 <td>{{ article.description }}</td>
                 <td>{{ article.inStock ? 'Yes' : 'No' }}</td>
                 <td>
@@ -29,7 +31,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="6">no records found</td>
             </tr>
         {% endfor %}
         </tbody>

@@ -40,7 +40,7 @@ class ArticleController extends AbstractController
      */
     public function getArticle($id, Request $request, ArticleService $articleService): Response
     {
-        $article = $articleService->getById($id);
+        $article = $articleService->getByIdOrSlug($id);
         return $this->json($article);
     }
 }

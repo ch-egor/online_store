@@ -35,7 +35,7 @@ class OrderController extends AbstractController
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
 
         $user = $this->getUser();
-        $article = $articleService->getById($articleId);
+        $article = $articleService->getByIdOrSlug($articleId);
         $quantity = $request->request->getInt('quantity', 1);
 
         if (!$article->getInStock()) {
@@ -55,7 +55,7 @@ class OrderController extends AbstractController
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
 
         $user = $this->getUser();
-        $article = $articleService->getById($articleId);
+        $article = $articleService->getByIdOrSlug($articleId);
 
         return $this->json([
             'success' => $orderService->removeItem($user, $article),

@@ -2,7 +2,7 @@
   <div>
     <h2>{{ object.title }}</h2>
     <p>{{ shortDescription }}</p>
-    <p><router-link :to="{ name: 'article', params: { id: object.id } }">View details »</router-link></p>
+    <p><router-link :to="{ name: 'article', params: { id: object.slug } }">View details »</router-link></p>
     <p v-if="isLoggedIn">
       <template v-if="object.inStock">
         <button type="button" class="btn btn-light" @click="incrementItem">+</button>

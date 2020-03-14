@@ -45,6 +45,7 @@ class AppFixtures extends Fixture
         $apple = new Article();
         $apple
             ->setTitle('Apple')
+            ->setSlug('apple')
             ->setCategory($categoryRepo->findOneBy(['title' => 'Fruits']))
             ->setDescription("Apple's description")
             ->setInStock(true);
@@ -53,6 +54,7 @@ class AppFixtures extends Fixture
         $orange = new Article();
         $orange
             ->setTitle('Orange')
+            ->setSlug('orange')
             ->setCategory($categoryRepo->findOneBy(['title' => 'Fruits']))
             ->setDescription("Orange's description")
             ->setInStock(true);
@@ -61,6 +63,7 @@ class AppFixtures extends Fixture
         $banana = new Article();
         $banana
             ->setTitle('Banana')
+            ->setSlug('banana')
             ->setCategory($categoryRepo->findOneBy(['title' => 'Fruits']))
             ->setDescription("Banana's description")
             ->setInStock(false);
@@ -69,6 +72,7 @@ class AppFixtures extends Fixture
         $carrot = new Article();
         $carrot
             ->setTitle('Carrot')
+            ->setSlug('carrot')
             ->setCategory($categoryRepo->findOneBy(['title' => 'Vegetables']))
             ->setDescription("Carrot's description")
             ->setInStock(false);
@@ -77,6 +81,7 @@ class AppFixtures extends Fixture
         $tomato = new Article();
         $tomato
             ->setTitle('Tomato')
+            ->setSlug('tomato')
             ->setCategory($categoryRepo->findOneBy(['title' => 'Vegetables']))
             ->setDescription("Tomato's description")
             ->setInStock(true);
