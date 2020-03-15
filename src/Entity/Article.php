@@ -23,12 +23,12 @@ class Article
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=63)
+     * @ORM\Column(type="string", length=63, unique=true)
      */
     private $slug;
 
     /**
-     * @ORM\Column(type="string", length=65535)
+     * @ORM\Column(type="text")
      */
     private $description;
 

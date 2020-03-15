@@ -23,7 +23,7 @@ class Category
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=63)
+     * @ORM\Column(type="string", length=63, unique=true)
      */
     private $slug;
 
